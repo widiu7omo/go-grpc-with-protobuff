@@ -1,0 +1,28 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+package model;
+
+option go_package = "./model";
+
+enum NoteStatus {
+    UNCHECKED = 0;
+    CHECKED = 1;
+}
+
+message Note{
+    int32 id = 1;
+    string title = 2;
+    optional string desc = 3;
+    NoteStatus status = 4; 
+}
+
+message NoteList{
+    repeated Note list = 1;
+}
+
+
+service Notes{
+    rpc Register(Note) returns (google.protobuf.Empty) {}
+    rpc List(google.protobuf.Empty) returns (NoteList) {}
+}
